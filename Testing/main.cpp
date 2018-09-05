@@ -1,8 +1,15 @@
-#include <QCoreApplication>
+#include "TVShow/TTVShow.h"
+
+#include <QtTest/QTest>
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication a(argc, argv);
+    int returnCode = 0;
 
-    return a.exec();
+#ifdef ALL_TESTS
+    TTVShow tTVShow;
+    returnCode+= QTest::qExec(&tTVShow, argc, argv);
+#endif
+
+    return returnCode;
 }
