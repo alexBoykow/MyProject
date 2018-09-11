@@ -1,25 +1,25 @@
 CONFIG(tvShow){
 
-    INCLUDEPATH += ../TVShow/
-
     CONFIG(release){
-        LIBS+= -L/../TVShow/release/ -lTVShow
+        LIBS+= -L../TVShow/release -lTVShow
     }
     else{
-        LIBS+= -L/../TVShow/debug/ -lTVShowd
+        LIBS+= -L../TVShow/debug -lTVShowd
     }
+
+    INCLUDEPATH += ../TVShow \
 }
 
 CONFIG(algorithmic){
 
-    INCLUDEPATH += ../algorithmic/
-
     CONFIG(release){
-        LIBS += -L../algorithmic/release/ -lalgorithmic
+        LIBS += -L../algorithmic/release -lalgorithmic
     }
     else{
-        LIBS += -L../algorithmic/debug/ -lalgorithmicd
+        LIBS += -L../algorithmic/debug -lalgorithmicd
     }
+
+    INCLUDEPATH += ../algorithmic \
 }
 
 CONFIG(all){
