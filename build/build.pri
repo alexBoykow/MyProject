@@ -1,25 +1,15 @@
 CONFIG(tvShow){
 
     CONFIG(release){
+        PRE_TARGETDEPS+= ../TVShow/release/libTVShow.a
         LIBS+= -L../TVShow/release -lTVShow
     }
     else{
+        PRE_TARGETDEPS+= ../TVShow/debug/libTVShowd.a
         LIBS+= -L../TVShow/debug -lTVShowd
     }
 
     INCLUDEPATH += ../TVShow \
-}
-
-CONFIG(algorithmic){
-
-    CONFIG(release){
-        LIBS += -L../algorithmic/release -lalgorithmic
-    }
-    else{
-        LIBS += -L../algorithmic/debug -lalgorithmicd
-    }
-
-    INCLUDEPATH += ../algorithmic \
 }
 
 CONFIG(all){
