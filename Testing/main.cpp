@@ -1,31 +1,30 @@
-#ifdef ALGORITHMIC
-#include "algorithmic/TProblem1.h"
-#endif
-
 #ifdef TV_SHOW
 #include "TVShow/TTVShow.h"
 #endif
 
 #include <QtTest/QTest>
+#include <QCoreApplication>
+
+int testExec(QObject *testObject,
+             const QStringList &args = QStringList())
+{
+    return QTest::qExec(testObject,
+                        QStringList()
+                        << QCoreApplication::arguments().first()
+                        << args);
+}
 
 int main(int argc, char *argv[])
 {
+    QCoreApplication app(argc, argv);
+
     int returnCode = 0;
 
 #ifdef TV_SHOW
 
 #ifdef ALL_TESTS
     TTVShow tTVShow;
-    returnCode+= QTest::qExec(&tTVShow, argc, argv);
-#endif
-
-#endif
-
-#ifdef ALGORITHMIC
-
-#ifdef ALL_TESTS
-    TProblem1 tProblem1;
-    returnCode+= QTest::qExec(&tProblem1, argc, argv);
+    returnCode+= testExec(&tTVShow);
 #endif
 
 #endif
