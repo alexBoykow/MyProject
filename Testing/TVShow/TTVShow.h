@@ -7,8 +7,7 @@ class TTVShow : public QObject
 {
     Q_OBJECT
 private slots:
-    void TestReadInputData_data();
-    void TestReadInputData();
+    void TestMacrosTestUtilities();
 };
 
 #endif // TTVSHOW_H
