@@ -19,7 +19,7 @@ public:
                 && value_ == other.value_;
     }
 
-    const QString toString() const
+    QString toString() const
     {
         return QString("Str: %1..."
                        "Value: %2")
