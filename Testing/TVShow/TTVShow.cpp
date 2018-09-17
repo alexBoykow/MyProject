@@ -46,18 +46,18 @@ void TTVShow::TestMacrosTestUtilities()
 
     bool x = true;
     bool y = true;
-    QCOMPARE(x, y);
+    EQUALS(x, y);
 
     int x_int = 10;
     int y_int = 10;
-    QCOMPARE(x_int, y_int);
+    EQUALS(x_int, y_int);
 
     double x_double = 10.2;
     double y_double = 10.2;
-    QCOMPARE(x_double, y_double);
+    EQUALS(x_double, y_double);
 
     TestObject testObject_1(tr("Мама"), 2);
-    TestObject testObject_2(tr("Папа"), 2);
+    TestObject testObject_2(tr("Мама"), 2);
 
     EQUALS(testObject_1, testObject_2);
 

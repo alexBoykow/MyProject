@@ -9,12 +9,25 @@
     if(QFile::exists(fileName))\
     if(!QFile::remove(fileName))QFAIL(failMessage);
 
+template<class T>
+auto anyToString_imp(const T &object, int)
+->decltype ( object.toString() )
+{
+    return object.toString();
+}
 
 template<class T>
-QString anyToString(const T object)
+QString anyToString_imp(const T &object, long)
 {
-    return QString("%1")
-            .arg(object.toString());
+    ///если возникает ошибка,
+    ///  значит нужно переопределить у object метод toString()
+    return QString("%1").arg(object);
+}
+
+template<class T>
+QString anyToString(const T &object)
+{
+    return anyToString_imp(object, 0);
 }
 
 const char* ConsolePrintable(const QString &str)
