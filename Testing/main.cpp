@@ -1,7 +1,3 @@
-#ifdef TV_SHOW
-#include "TVShow/TTVShow.h"
-#endif
-
 #include <QtTest/QTest>
 #include <QCoreApplication>
 
