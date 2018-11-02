@@ -1,12 +1,10 @@
 CONFIG(tvShow){
 
     CONFIG(release){
-        message(Building TVShow release)
         PRE_TARGETDEPS+= ../TVShow/release/libTVShow.a
         LIBS+= -L../TVShow/release -lTVShow
     }
     else{
-        message(Building TVShow debug)
         PRE_TARGETDEPS+= ../TVShow/debug/libTVShowd.a
         LIBS+= -L../TVShow/debug -lTVShowd
     }
@@ -15,18 +13,16 @@ CONFIG(tvShow){
 }
 
 
-CONFIG(tennisBukmeker){
+CONFIG(learningPortal){
 
     CONFIG(release){
-        message(Building TennisBukmeker release)
-        PRE_TARGETDEPS+= ../TennisBukmeker/release/libTennisBukmeker.a
-        LIBS+= -L../TennisBukmeker/release -lTennisBukmeker
+        PRE_TARGETDEPS+= ../LearningPortal/release/libLearningPortal.a
+        LIBS+= -L../LearningPortal/release -lLearningPortal
     }
     else{
-        message(Building TVShow debug)
-        PRE_TARGETDEPS+= ../TennisBukmeker/debug/libTennisBukmekerd.a
-        LIBS+= -L../TennisBukmeker/debug -lTennisBukmekerd
+        PRE_TARGETDEPS+= ../LearningPortal/debug/libLearningPortald.a
+        LIBS+= -L../LearningPortal/debug -lLearningPortald
     }
 
-    INCLUDEPATH += ../TennisBukmeker \
+    INCLUDEPATH += ../LearningPortal \
 }

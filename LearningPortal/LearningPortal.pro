@@ -1,13 +1,19 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2018-09-29T21:38:37
+# Project created by QtCreator 2018-11-02T21:03:02
 #
 #-------------------------------------------------
 
 QT       -= gui
 
-
-TARGET = TennisBukmeker
+CONFIG(release){
+    message(Building LearningPortal release)
+    TARGET = LearningPortal
+}
+else{
+    message(Building LearningPortal debug)
+    TARGET = LearningPortald
+}
 
 TEMPLATE = lib
 CONFIG += staticlib
