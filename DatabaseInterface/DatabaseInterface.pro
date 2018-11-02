@@ -1,21 +1,20 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2018-11-02T21:03:02
+# Project created by QtCreator 2018-11-02T21:35:17
 #
 #-------------------------------------------------
 
 QT       -= gui
 
+
 CONFIG(release){
-    message(Building LearningPortal release)
-    TARGET = LearningPortal
+    message(Building DatabaseInterface release)
+    TARGET = DatabaseInterface
 }
 else{
-    message(Building LearningPortal debug)
-    TARGET = LearningPortald
+    message(Building DatabaseInterface debug)
+    TARGET = DatabaseInterfaced
 }
-
-include(../commonBuild/commonBuild.pri)
 
 TEMPLATE = lib
 CONFIG += staticlib
@@ -32,10 +31,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    Models/User.cpp
+        DatabaseInterface.cpp
 
 HEADERS += \
-    Models/User.h
+        DatabaseInterface.h
 unix {
     target.path = /usr/lib
     INSTALLS += target

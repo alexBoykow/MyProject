@@ -6,3 +6,14 @@ CONFIG(tvShow){
 
     DEFINES+= TV_SHOW
 }
+
+CONFIG(learningPortal){
+
+    HEADERS+= LearningPortal/TUsers.h
+
+    SOURCES+= LearningPortal/TUsers.cpp
+
+    DEFINES+= LEARNING_PORTAL
+}
+
+

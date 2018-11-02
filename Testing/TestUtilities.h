@@ -5,9 +5,16 @@
 #include <QTest>
 #include <QTextCodec>
 
+#include <DatabaseInterface.h>
+
 #define PREPARE_TEST_FILE(fileName, failMessage)\
     if(QFile::exists(fileName))\
     if(!QFile::remove(fileName))QFAIL(failMessage);
+
+#define PREPATE_TEST_DATABASE(dataBaseName, failMessage)\
+    if(DatabaseInterface::exists(dataBaseName))\
+    if(!DatabaseInterface::remove(dataBaseName))QFAIL(failMessage);
+
 
 template<class T>
 auto anyToString_imp(const T &object, int)

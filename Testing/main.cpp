@@ -1,6 +1,8 @@
 #include <QtTest/QTest>
 #include <QCoreApplication>
 
+#include <LearningPortal/TUsers.h>
+
 int testExec(QObject *testObject,
              const QStringList &args = QStringList())
 {
@@ -21,6 +23,15 @@ int main(int argc, char *argv[])
 #ifdef ALL_TESTS
     TTVShow tTVShow;
     returnCode+= testExec(&tTVShow);
+#endif
+
+#endif
+
+#ifdef LEARNING_PORTAL
+
+#ifdef ALL_TESTS
+    TUsers tUsers;
+    returnCode+= testExec(&tUsers);
 #endif
 
 #endif

@@ -25,4 +25,7 @@ CONFIG(learningPortal){
     }
 
     INCLUDEPATH += ../LearningPortal \
+                   ../LearningPortal/Models \
+
+    include(../commonBuild/commonBuild.pri)
 }
