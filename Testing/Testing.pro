@@ -21,12 +21,18 @@ include(buildTesting.pri)
 CONFIG(all){
     DEFINES+= ALL_TESTS
 }
+else{
+    DEFINES+= CURRENT_TESTS
+}
 
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    DatabaseInterface/TDatabaseInterface.cpp \
+    TestUtilities.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-HEADERS += TestUtilities.h
+HEADERS += TestUtilities.h \
+    DatabaseInterface/TDatabaseInterface.h

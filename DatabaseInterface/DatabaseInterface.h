@@ -8,6 +8,7 @@ class DatabaseInterface
 public:
     static bool exists(const QString &dataBaseName);
     static bool remove(const QString &dataBaseName);
+    static void create(const QString &dataBaseName);
 };
 
 #endif // DATABASEINTERFACE_H

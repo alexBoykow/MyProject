@@ -16,6 +16,8 @@ else{
     TARGET = DatabaseInterfaced
 }
 
+include(../definesBuild/definesBuild.pri)
+
 TEMPLATE = lib
 CONFIG += staticlib
 

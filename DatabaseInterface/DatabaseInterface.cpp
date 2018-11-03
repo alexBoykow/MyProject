@@ -1,17 +1,34 @@
 #include "DatabaseInterface.h"
 
-#include <QString>
+#include <QFile>
 
 bool DatabaseInterface::exists(const QString &dataBaseName)
 {
-    Q_UNUSED(dataBaseName);
-
-    return false;
+#ifdef SQLITE
+    return QFile::exists(dataBaseName);
+#endif
 }
 
 bool DatabaseInterface::remove(const QString &dataBaseName)
 {
-    Q_UNUSED(dataBaseName);
+    if(exists(dataBaseName))
+    {
+#ifdef SQLITE
+        return QFile::remove(dataBaseName);
+#endif
+    }
 
-    return false;
+    return true;
+}
+
+void DatabaseInterface::create(const QString &dataBaseName)
+{
+#ifdef SQLITE
+    if(!QFile::exists(dataBaseName))
+    {
+        QFile file(dataBaseName);
+        file.open(QIODevice::WriteOnly);
+        file.close();
+    }
+#endif
 }

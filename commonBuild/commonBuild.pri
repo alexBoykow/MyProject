@@ -8,3 +8,5 @@ else{
 }
 
     INCLUDEPATH += ../DatabaseInterface
+
+    include(../definesBuild/definesBuild.pri)

@@ -1,8 +1,7 @@
 #include "TUsers.h"
 
-#include <QtTest/QTest>
-#include <TestUtilities.h>
-#include <User.h>
+#include "TestUtilities.h"
+#include "User.h"
 
 using Users = QList<User>;
 Q_DECLARE_METATYPE(Users)

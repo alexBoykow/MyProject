@@ -3,9 +3,8 @@
 
 #include <QFile>
 #include <QTest>
-#include <QTextCodec>
 
-#include <DatabaseInterface.h>
+#include "DatabaseInterface.h"
 
 #define PREPARE_TEST_FILE(fileName, failMessage)\
     if(QFile::exists(fileName))\
@@ -37,20 +36,9 @@ QString anyToString(const T &object)
     return anyToString_imp(object, 0);
 }
 
-const char* ConsolePrintable(const QString &str)
-{
-    return QTextCodec::codecForName("windows-1251")->fromUnicode(str).constData();
-}
+const char* ConsolePrintable(const QString &str);
 
-QString compareMessage(const QString &actual, const QString &expected)
-{
-    return QString("\nActual:\n"
-                   "%1\n\n"
-                   "Expected:\n"
-                   "%2")
-            .arg(actual)
-            .arg(expected);
-}
+QString compareMessage(const QString &actual, const QString &expected);
 
 #define EQUALS(actual, expected)\
     if(actual == expected)\

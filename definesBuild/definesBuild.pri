@@ -1,0 +1,3 @@
+CONFIG(sqlite){
+    DEFINES+= SQLITE
+}
