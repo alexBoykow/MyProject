@@ -1,5 +1,6 @@
 #include <QtTest/QTest>
 #include <QCoreApplication>
+#include <QDebug>
 
 #include <LearningPortal/TUsers.h>
 #include <DatabaseInterface/TDatabaseInterface.h>

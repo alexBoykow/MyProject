@@ -1,5 +1,5 @@
 QT -= gui
-QT += testlib
+QT += testlib sql
 
 CONFIG += c++11 console
 CONFIG -= app_bundle

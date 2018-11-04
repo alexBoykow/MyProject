@@ -1,6 +1,28 @@
 #include "DatabaseInterface.h"
 
 #include <QFile>
+#include <QUuid>
+
+DatabaseInterface::DatabaseInterface(const QString &dataBaseName)
+    :dataBaseName_(dataBaseName)
+{
+    create(dataBaseName);
+    open();
+}
+
+void DatabaseInterface::open()
+{
+    const QString idConnection(QUuid::createUuid().toString());
+
+    if(QSqlDatabase::connectionNames().contains(idConnection))
+    {
+        QSqlDatabase::removeDatabase(idConnection);
+    }
+
+    database_ = QSqlDatabase::addDatabase(typeDatabase(), idConnection);
+    database_.setDatabaseName(dataBaseName_);
+    database_.open();
+}
 
 bool DatabaseInterface::exists(const QString &dataBaseName)
 {
@@ -23,12 +45,31 @@ bool DatabaseInterface::remove(const QString &dataBaseName)
 
 void DatabaseInterface::create(const QString &dataBaseName)
 {
-#ifdef SQLITE
-    if(!QFile::exists(dataBaseName))
+    if(!exists(dataBaseName))
     {
+#ifdef SQLITE
         QFile file(dataBaseName);
         file.open(QIODevice::WriteOnly);
         file.close();
-    }
 #endif
+    }
+
+}
+
+const QSqlDatabase &DatabaseInterface::database() const
+{
+    return database_;
+}
+
+const QString DatabaseInterface::typeDatabase()
+{
+#ifdef SQLITE
+    return "QSQLITE";
+#endif
+}
+
+SQLQuery::SQLQuery(const QSqlDatabase &database)
+    :QSqlQuery(database)
+{
+
 }

@@ -10,7 +10,7 @@
     if(QFile::exists(fileName))\
     if(!QFile::remove(fileName))QFAIL(failMessage);
 
-#define PREPATE_TEST_DATABASE(dataBaseName, failMessage)\
+#define PREPARE_TEST_DATABASE(dataBaseName, failMessage)\
     if(DatabaseInterface::exists(dataBaseName))\
     if(!DatabaseInterface::remove(dataBaseName))QFAIL(failMessage);
 
@@ -34,6 +34,21 @@ template<class T>
 QString anyToString(const T &object)
 {
     return anyToString_imp(object, 0);
+}
+
+template<class T>
+QString anyToString(const QList<T> &list)
+{
+    QString str = "QList:{\n";
+
+    foreach(const T &object, list)
+    {
+        str+= anyToString_imp(object, 0) + "\n";
+    }
+
+    str+= "}";
+
+    return str;
 }
 
 const char* ConsolePrintable(const QString &str);

@@ -1,14 +1,33 @@
 #ifndef DATABASEINTERFACE_H
 #define DATABASEINTERFACE_H
 
-class QString;
+#include <QtSql/QSqlDatabase>
+#include <QtSql/QSqlQuery>
+
+class SQLQuery : public QSqlQuery
+{
+public:
+    SQLQuery(const QSqlDatabase &database);
+};
 
 class DatabaseInterface
 {
+protected:
+    DatabaseInterface(const QString &dataBaseName);
+    void open();
+
+    const QSqlDatabase &database() const;
+
 public:
     static bool exists(const QString &dataBaseName);
     static bool remove(const QString &dataBaseName);
     static void create(const QString &dataBaseName);
+
+private:
+    QString dataBaseName_;
+    QSqlDatabase database_;
+
+    static const QString typeDatabase();
 };
 
 #endif // DATABASEINTERFACE_H

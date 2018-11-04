@@ -5,7 +5,7 @@
 void TDatabaseInterface::TestCreateExistsRemoveDatabase()
 {
     const QString dataBaseName("database.db");
-    PREPATE_TEST_DATABASE(dataBaseName, "can't prepare test database");
+    PREPARE_TEST_DATABASE(dataBaseName, "can't prepare test database");
     QVERIFY(!DatabaseInterface::exists(dataBaseName));
 
     DatabaseInterface::create(dataBaseName);
