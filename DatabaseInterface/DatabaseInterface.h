@@ -23,8 +23,10 @@ public:
     static bool remove(const QString &dataBaseName);
     static void create(const QString &dataBaseName);
 
-private:
+protected:
     QString dataBaseName_;
+
+private:
     QSqlDatabase database_;
 
     static const QString typeDatabase();

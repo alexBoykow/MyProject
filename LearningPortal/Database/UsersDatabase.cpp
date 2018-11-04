@@ -33,6 +33,30 @@ void UsersWriter::addUsers(const QList<User> &users)
     }
 }
 
+void UsersWriter::addUser(const User &user)
+{
+    if(!user.login().isEmpty())
+    {
+        const QSet<QString> allLogins =
+                UsersReader(dataBaseName_).readAllLogins();
+
+        if(!allLogins.contains(user.login()))
+        {
+            SQLQuery query(database());
+
+            query.prepare(QString("INSERT INTO %1 (name, login, password)"
+                                  " VALUES(:name,:login,:password)")
+                          .arg(tableName_));
+
+            query.bindValue(":name", user.name());
+            query.bindValue(":login", user.login());
+            query.bindValue(":password", user.password());
+
+            query.exec();
+        }
+    }
+}
+
 const QString UsersWriter::insertQueryUsers() const
 {
     return QString("INSERT INTO %1 (name,login,password) VALUES ")
@@ -66,6 +90,26 @@ QList<User> UsersReader::readUsers() const
 const QString UsersReader::selectAllUsersQuery() const
 {
     return QString("SELECT name,login,password FROM %1").arg(tableName_);
+}
+
+const QString UsersReader::selectAllLoginsQuery() const
+{
+    return QString("SELECT login FROM %1").arg(tableName_);
+}
+
+const QSet<QString> UsersReader::readAllLogins() const
+{
+    SQLQuery query(database());
+    query.exec(selectAllLoginsQuery());
+
+    QSet<QString> logins;
+
+    while(query.next())
+    {
+        logins << query.value(0).toString();
+    }
+
+    return logins;
 }
 
 UsersDatabaseInterface::UsersDatabaseInterface(const QString &dataBaseName)

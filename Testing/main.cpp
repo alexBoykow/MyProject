@@ -22,7 +22,9 @@ int main(int argc, char *argv[])
 
 #ifdef CURRENT_TESTS
     TUsers tUsers;
-    returnCode+= testExec(&tUsers);
+    returnCode+= testExec(&tUsers,
+                          QStringList()
+                          << "TestRegistrationUser");
 #endif
 
 #ifdef TV_SHOW

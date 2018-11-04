@@ -106,3 +106,74 @@ void TUsers::TestWriteReadUsers()
         EQUALS(actual, expectedUsers);
     }
 }
+
+void TUsers::TestRegistrationUser_data()
+{
+    QTest::addColumn<User>("user");
+    QTest::addColumn<Users>("allUsers");
+    QTest::addColumn<Users>("expectedUsers");
+
+    QTest::newRow("empty-user-empty-bd") << User()
+                                         << Users()
+                                         << Users();
+
+    QTest::newRow("empty-user-not-empty-bd") << User()
+                                             << (Users()
+                                                 << User()
+                                                 .setLogin("login")
+                                                 .setPassword("p"))
+                                             << (Users()
+                                                 << User()
+                                                 .setLogin("login")
+                                                 .setPassword("p"));
+
+    QTest::newRow("user-not-login") << User().setName("name")
+                                    << (Users()
+                                        << User()
+                                        .setLogin("login")
+                                        .setPassword("p"))
+                                    << (Users()
+                                        << User()
+                                        .setLogin("login")
+                                        .setPassword("p"));
+
+    QTest::newRow("user-yes-login-1") << User().setLogin("opa")
+                                      << (Users()
+                                          << User()
+                                          .setLogin("login")
+                                          .setPassword("p"))
+                                      << (Users()
+                                          << User()
+                                          .setLogin("login")
+                                          .setPassword("p")
+                                          << User()
+                                          .setLogin("opa"));
+
+    QTest::newRow("user-yes-login-2") << User().setLogin("login").setName("z")
+                                      << (Users()
+                                          << User()
+                                          .setLogin("login")
+                                          .setPassword("p"))
+                                      << (Users()
+                                          << User()
+                                          .setLogin("login")
+                                          .setPassword("p"));
+}
+
+void TUsers::TestRegistrationUser()
+{
+    QFETCH(User, user);
+    QFETCH(Users, allUsers);
+    QFETCH(Users, expectedUsers);
+
+    const QString dataBaseName(QString(QTest::currentDataTag()) + ".db");
+    PREPARE_TEST_DATABASE(dataBaseName, "can't prepare test database");
+
+    UsersWriter writer(dataBaseName);
+    writer.addUsers(allUsers);
+    writer.addUser(user);
+
+    UsersReader reader(dataBaseName);
+    const Users actualUsers = reader.readUsers();
+    EQUALS(actualUsers, expectedUsers);
+}

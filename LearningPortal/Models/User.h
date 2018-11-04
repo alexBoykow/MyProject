@@ -2,6 +2,7 @@
 #define USER_H
 
 #include <QString>
+#include <QObject>
 
 class User
 {
@@ -23,5 +24,8 @@ private:
     QString login_;
     QString password_;
 };
+
+Q_DECLARE_METATYPE(User)
+
 
 #endif // USER_H
